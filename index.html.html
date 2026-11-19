@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OneClick | Tap. Review. Grow.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    // Configure Tailwind with custom colors and Inter font family
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            obsidian: '#080808',
+            surface: '#111111',
+            surfaceElev: '#171717',
+            brandYellow: '#ffd21f',
+            brandYellowDark: '#e6ad00',
+            whatsapp: '#19c85a',
+            whatsappDark: '#13a849',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    /* Subtle radial glow and smooth glassmorphic polish */
+    .hero-glow {
+      background: radial-gradient(circle at 50% 15%, rgba(255, 210, 31, 0.14), rgba(8, 8, 8, 0) 65%);
+    }
+    .card-hover {
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 210, 31, 0.55);
+      box-shadow: 0 18px 36px -12px rgba(0, 0, 0, 0.75);
+    }
+    .nfc-card-sheen {
+      background: linear-gradient(135deg, rgba(255, 210, 31, 0.16) 0%, rgba(17, 17, 17, 0.95) 45%, rgba(255, 210, 31, 0.08) 100%);
+    }
+    @keyframes nfcPulseRing {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      70% { transform: scale(1.25); opacity: 0; }
+      100% { transform: scale(1.25); opacity: 0; }
+    }
+    .nfc-pulse::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 1rem;
+      border: 2px solid rgba(255, 210, 31, 0.55);
+      animation: nfcPulseRing 2.2s infinite;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="bg-obsidian text-zinc-100 font-sans antialiased selection:bg-brandYellow selection:text-obsidian overflow-x-hidden">
+
+  <!-- Sticky Header -->
+  <header class="sticky top-0 z-50 w-full bg-obsidian/90 backdrop-blur-md border-b border-zinc-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <!-- OneClick Logo & Tagline -->
+        <a href="#home" class="flex items-center gap-3 group focus:outline-none">
+          <div class="w-10 h-10 rounded-xl bg-brandYellow text-obsidian flex items-center justify-center font-black text-lg shadow-md shadow-brandYellow/20 group-hover:bg-brandYellowDark transition-colors">
+            1C
+          </div>
+          <div class="flex flex-col">
+            <span class="text-lg sm:text-xl font-extrabold tracking-tight text-white leading-none">
+              OneClick
+            </span>
+            <span class="text-[11px] sm:text-xs font-medium text-brandYellow tracking-wide mt-0.5">
+              Tap. Review. Grow.
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav aria-label="Primary Navigation" class="hidden md:flex items-center gap-7 text-sm font-medium text-zinc-300">
+          <a href="#home" class="hover:text-brandYellow transition-colors py-2">Home</a>
+          <a href="#products" class="hover:text-brandYellow transition-colors py-2">Products</a>
+          <a href="#how-it-works" class="hover:text-brandYellow transition-colors py-2">How It Works</a>
+          <a href="#benefits" class="hover:text-brandYellow transition-colors py-2">Benefits</a>
+          <a href="#contact" class="hover:text-brandYellow transition-colors py-2">Contact</a>
+        </nav>
+
+        <!-- Header WhatsApp CTA & Mobile Menu Toggle -->
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <a
+            href="https://wa.me/918318190437?text=Hi%20OneClick%2C%20I%20want%20to%20get%20smart%20NFC%20Google%20Review%20solutions%20for%20my%20business."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 bg-whatsapp hover:bg-whatsappDark text-white font-semibold text-xs sm:text-sm px-3.5 sm:px-4 py-2.5 rounded-xl shadow-lg shadow-whatsapp/20 transition-all"
+          >
+            <!-- WhatsApp Icon SVG -->
+            <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.52 3.48A11.82 11.82 0 0012.07 0C5.5 0 .16 5.34.16 11.91c0 2.1.55 4.15 1.6 5.96L0 24l6.3-1.65a11.87 11.87 0 005.77 1.47h.01c6.57 0 11.91-5.34 11.91-11.91 0-3.18-1.24-6.17-3.48-8.43zm-8.45 18.33h-.01a9.86 9.86 0 01-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.85 9.85 0 01-1.51-5.23c0-5.45 4.43-9.88 9.89-9.88 2.64 0 5.12 1.03 6.98 2.9a9.82 9.82 0 012.89 6.99c0 5.45-4.44 9.88-9.87 9.88zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.05 1.02-1.05 2.5s1.07 2.9 1.22 3.1c.15.2 2.11 3.22 5.11 4.52.71.31 1.27.49 1.71.63.72.23 1.37.2 1.89.12.58-.09 1.76-.72 2.01-1.41.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z" />
+            </svg>
+            <span>WhatsApp Chat</span>
+          </a>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button
+            id="mobile-menu-btn"
+            type="button"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+            class="md:hidden inline-flex items-center justify-center p-2.5 rounded-xl bg-surface border border-zinc-800 text-zinc-200 hover:text-brandYellow hover:border-brandYellow/50 transition-colors"
+          >
+            <!-- Hamburger Icon -->
+            <svg id="icon-hamburger" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <!-- Close Icon -->
+            <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden bg-surface border-t border-zinc-800/90">
+      <div class="px-4 py-4 space-y-1.5">
+        <a href="#home" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-zinc-200 hover:bg-surfaceElev hover:text-brandYellow transition-colors">
+          Home
+        </a>
+        <a href="#products" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-zinc-200 hover:bg-surfaceElev hover:text-brandYellow transition-colors">
+          Products
+        </a>
+        <a href="#how-it-works" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-zinc-200 hover:bg-surfaceElev hover:text-brandYellow transition-colors">
+          How It Works
+        </a>
+        <a href="#benefits" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-zinc-200 hover:bg-surfaceElev hover:text-brandYellow transition-colors">
+          Benefits
+        </a>
+        <a href="#contact" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-zinc-200 hover:bg-surfaceElev hover:text-brandYellow transition-colors">
+          Contact
+        </a>
+        <div class="pt-2">
+          <a
+            href="https://wa.me/918318190437?text=Hi%20OneClick%2C%20I%20would%20like%20to%20order%20NFC%20Google%20Review%20products."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-center gap-2 w-full bg-whatsapp hover:bg-whatsappDark text-white font-semibold text-sm px-4 py-3 rounded-xl transition-colors"
+          >
+            <span>Chat on WhatsApp (+91 83181 90437)</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="relative hero-glow pt-14 pb-20 sm:pt-20 sm:pb-28 border-b border-zinc-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <!-- Hero Left Column -->
+          <div class="lg:col-span-7 text-center lg:text-left">
+            <!-- Rating Trust Badge -->
+            <div class="inline-flex flex-wrap items-center justify-center lg:justify-start gap-2.5 px-4 py-2 rounded-full bg-surface border border-zinc-800 mb-6 shadow-sm">
+              <div class="flex items-center gap-0.5 text-brandYellow" aria-label="4.9 out of 5 stars">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+              </div>
+              <span class="text-xs sm:text-sm font-semibold text-white">4.9/5 Average Rating</span>
+              <span class="text-zinc-600">•</span>
+              <span class="text-xs sm:text-sm text-zinc-300">Trusted by 1,200+ Local Businesses</span>
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.1]">
+              Turn Every Customer Into a <span class="text-brandYellow">Google Review.</span>
+            </h1>
+
+            <p class="mt-5 text-base sm:text-lg text-zinc-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              No app downloads, no awkward requests, and no typing long URLs. Customers simply tap their phone on a <strong class="text-white font-semibold">OneClick</strong> NFC card or stand and land directly on your Google review screen in seconds.
+            </p>
+
+            <!-- Hero CTAs -->
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 sm:gap-4">
+              <a
+                href="#products"
+                class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brandYellow hover:bg-brandYellowDark text-obsidian font-bold text-sm sm:text-base px-6 py-3.5 rounded-xl shadow-lg shadow-brandYellow/20 transition-all"
+              >
+                <span>Explore Review Products</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </a>
+              <a
+                href="https://wa.me/918318190437?text=Hi%20OneClick%2C%20I%20want%20to%20order%20NFC%20Google%20Review%20cards%2Fstands."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-whatsapp hover:bg-whatsappDark text-white font-semibold text-sm sm:text-base px-6 py-3.5 rounded-xl shadow-lg shadow-whatsapp/20 transition-all"
+              >
+                <span>Order via WhatsApp</span>
+              </a>
+            </div>
+
+            <!-- Quick Proof Metrics -->
+            <div class="mt-10 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 pt-6 border-t border-zinc-800/80">
+              <div>
+                <p class="text-xl sm:text-2xl font-extrabold text-white">3x–5x</p>
+                <p class="text-xs text-zinc-400 mt-0.5">Faster Review Growth</p>
+              </div>
+              <div>
+                <p class="text-xl sm:text-2xl font-extrabold text-brandYellow">0 Apps</p>
+                <p class="text-xs text-zinc-400 mt-0.5">Instant Tap &amp; Scan</p>
+              </div>
+              <div>
+                <p class="text-xl sm:text-2xl font-extrabold text-white">24 Hrs</p>
+                <p class="text-xs text-zinc-400 mt-0.5">Custom Link Setup</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Right Visual Card Showcase -->
+          <div class="lg:col-span-5">
+            <div class="relative bg-surface border border-zinc-800 rounded-3xl p-5 sm:p-7 shadow-2xl">
+              <div class="flex items-center justify-between mb-4">
+                <span class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-brandYellow bg-brandYellow/10 px-3 py-1 rounded-full">
+                  <span class="w-2 h-2 rounded-full bg-brandYellow animate-pulse"></span>
+                  Interactive NFC Card Preview
+                </span>
+                <span class="text-xs text-zinc-400 font-medium">Tap Card Below</span>
+              </div>
+
+              <!-- Realistic NFC Card Photography + Interactive Tap Simulator -->
+              <div
+                id="hero-nfc-simulator"
+                role="button"
+                tabindex="0"
+                aria-label="Simulate tapping a smartphone on the OneClick NFC Review Card"
+                class="relative rounded-2xl overflow-hidden border border-brandYellow/45 bg-zinc-950 aspect-[4/3] group cursor-pointer select-none"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1000&q=85"
+                  alt="Close-up of smartphone tapping a matte black contactless NFC review card"
+                  loading="eager"
+                  onerror="this.onerror=null;this.src='https://placehold.co/800x600/111111/ffd21f?text=OneClick+NFC+Review+Card';"
+                  class="w-full h-full object-cover object-center opacity-70 group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/55 to-obsidian/20"></div>
+
+                <!-- Floating Matte Black & Gold NFC Card + Live 5-Star Popup -->
+                <div class="absolute inset-x-4 bottom-4 grid grid-cols-12 gap-3 items-end">
+                  <!-- Matte Black & Gold NFC Card Visual -->
+                  <div class="col-span-7 relative nfc-pulse rounded-xl nfc-card-sheen backdrop-blur-md border border-brandYellow/60 p-3.5 shadow-xl">
+                    <div class="flex items-center justify-between">
+                      <span class="text-[10px] font-black uppercase tracking-widest text-brandYellow">ONECLICK • NFC CARD</span>
+                      <svg class="w-5 h-5 text-brandYellow" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.5 14.5A3.5 3.5 0 0112 11m-5.5 3.5a7 7 0 0111 0m-14.5 0a10.5 10.5 0 0118 0" />
+                      </svg>
+                    </div>
+                    <p class="text-sm font-extrabold text-white mt-1.5">Tap Phone to Rate Us</p>
+                    <div class="flex items-center justify-between mt-2">
+                      <span class="text-xs text-brandYellow tracking-wider">★★★★★</span>
+                      <span class="text-[10px] font-semibold text-zinc-300 bg-obsidian/80 px-2 py-0.5 rounded">NFC + QR</span>
+                    </div>
+                  </div>
+
+                  <!-- Simulated Smartphone Google Review Popup -->
+                  <div id="hero-sim-popup" class="col-span-5 rounded-xl bg-zinc-900/95 backdrop-blur-md border border-zinc-700 p-3 shadow-xl text-center transition-all duration-300">
+                    <div class="w-7 h-7 mx-auto rounded-full bg-brandYellow text-obsidian flex items-center justify-center text-xs font-black">
+                      G
+                    </div>
+                    <p id="hero-sim-title" class="text-[11px] font-bold text-white mt-1.5 leading-tight">Click Card to Test Tap</p>
+                    <p id="hero-sim-status" class="text-[10px] text-brandYellow font-semibold mt-0.5">Instant 0.8s Prompt</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Simulated Outcome Strip -->
+              <div class="mt-4 bg-surfaceElev border border-zinc-800/90 rounded-2xl p-4 flex items-center justify-between gap-3">
+                <div>
+                  <p class="text-sm font-semibold text-white">Matte Black &amp; Gold NFC Cards</p>
+                  <p class="text-xs text-zinc-400 mt-0.5">Tap the card preview above to test the customer flow</p>
+                </div>
+                <button
+                  type="button"
+                  id="hero-test-tap-btn"
+                  class="shrink-0 text-xs font-bold bg-brandYellow hover:bg-brandYellowDark text-obsidian px-3.5 py-2 rounded-lg transition-colors cursor-pointer"
+                >
+                  Simulate Tap
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Grid with Realistic Card & Stand Photography -->
+    <section id="products" class="py-20 sm:py-24 bg-obsidian">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="max-w-3xl mx-auto text-center mb-14">
+          <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-brandYellow">
+            Smart Review Hardware
+          </span>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+            OneClick NFC Cards &amp; Stands for Every Counter
+          </h2>
+          <p class="mt-3 text-sm sm:text-base text-zinc-400">
+            Explore our Smart NFC Review Cards, VIP Matte Black &amp; Gold Cards, NFC Table Stands, Premium Desk Displays, and Waterproof Stickers.
+          </p>
+        </div>
+
+        <!-- Product Photo Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Product 1: Smart NFC Review Card -->
+          <article class="bg-surface border border-brandYellow/40 rounded-2xl overflow-hidden flex flex-col justify-between card-hover group">
+            <div>
+              <!-- Product Photo + Hardware Badge Overlay -->
+              <div class="relative h-52 w-full bg-zinc-950 overflow-hidden border-b border-zinc-800/80">
+                <img
+                  src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&w=900&q=85"
+                  alt="Smart NFC Review Card tapped with a smartphone for instant Google review"
+                  loading="lazy"
+                  onerror="this.onerror=null;this.src='https://placehold.co/800x500/111111/ffd21f?text=Smart+NFC+Review+Card';"
+                  class="w-full h-full object-cover object-center opacity-80 group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-surface via-obsidian/40 to-transparent"></div>
+                <span class="absolute top-3.5 left-3.5 text-xs font-bold px-3 py-1 rounded-full bg-brandYellow text-obsidian shadow-md">
+                  #1 Bestseller Card
+                </span>
+                <!-- Mini Card Mockup Tag -->
+                <div class="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between bg-obsidian/90 backdrop-blur-md border border-brandYellow/50 rounded-xl px-3 py-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-brandYellow/20 text-brandYellow flex items-center justify-center text-xs font-black">1C</span>
+                    <span class="text-xs font-semibold text-white">Matte Black &amp; Gold PVC</span>
+                  </div>
+                  <span class="text-[11px] font-bold text-brandYellow">NFC + QR</span>
+                </div>
+              </div>
+
+              <div class="p-6 pb-2">
+                <h3 class="text-xl font-bold text-white">Smart NFC Review Card</h3>
+                <p class="mt-2 text-sm text-zinc-400 leading-relaxed">
+                  Ultra-sleek matte black contactless tap card with metallic gold NFC waves and dynamic QR backup. Hand it to customers at billing, table service, or doorstep delivery.
+                </p>
+                <ul class="mt-4 space-y-2 text-xs sm:text-sm text-zinc-300">
+                  <li class="flex items-center gap-2">
+                    <span class="text-brandYellow font-bold">✓</span> Fits any wallet, lanyard, or staff pocket
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="text-brandYellow font-bold">✓</span> Works on modern iPhone &amp; Android
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="text-brandYellow font-bold">✓</span> Unlimited taps, zero monthly fee
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="px-6 pb-6 pt-4 mt-4 border-t border-zinc-800/80 flex items-center justify-between">
+              <span class="text-xs font-medium text-zinc-400">Single &amp; Team Packs</span>
+              <a
+                href="https://wa.me/918318190437?text=Hi%20OneClick%2C%20I%20want%20to%20order%20Smart%20NFC%20Review%20Cards."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-whatsapp hover:underline"
+              >
+                <span>Order Card</span>
+                <span>→</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Product 2: VIP Metal & Matte Gold NFC Card -->
+          <article class="bg-surface border border-zinc-800 rounded-2xl overflow-hidden flex flex-col justify-between card-hover group">
+            <div>
+              <!-- Product Photo + Hardware Badge Overlay -->
+              <div class="relative h-52 w-full bg-zinc-950 overflow-hidden border-b border-zinc-800/80">
+                <img
+                  src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?auto=format&fit=crop&w=900&q=85"
+                  alt="Luxury matte black and gold NFC tap card on dark surface"
+                  loading="lazy"
+                  onerror="this.onerror=null;this.src='https://placehold.co/800x500/111111/ffd21f?text=VIP+Gold+NFC+Card';"
+                  class="w-full h-full object-cover object-center opacity-80 group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-surface via-obsidian/40 to-transparent"></div>
+                <span class="absolute top-3.5 left-3.5 text-xs font-semibold px-3 py-1 rounded-full bg-obsidian/90 border border-brandYellow/50 text-brandYellow">
+                  Executive Edition
+                </span>
+                <!-- Mini Card Mockup Tag -->
+                <div class="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between bg-obsidian/90 backdrop-blur-md border border-brandYellow/40 rounded-xl px-3 py-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-brandYellow/20 text-brandYellow flex items-center justify-center text-xs font-black">VIP</span>
+                    <span class="text-xs font-semibold text-white">Laser-Engraved Gold Foil</span>
+                  </div>
+                  <span class="text-[11px] font-bold text-brandYellow">★★★★★</span>
+                </div>
+              </div>
+
+              <div class="p-6 pb-2">
+                <h3 class="text-xl font-bold text-white">VIP Gold-Foil NFC Card</h3>
+                <p class="mt-2 text-sm text-zinc-400 leading-relaxed">
+                  Heavyweight matte black card finished with gold-foil branding and high-gain NTAG215 chip for instant long-range tap response in luxury boutiques, clinics, and salons.
+                </p>
+                <ul class="mt-4 space-y-2 text-xs sm:text-sm text-zinc-300">
+                  <li class="flex items-center gap-2">
+                    <span class="text-brandYellow font-bold">✓</span> Scratch-resistant matte velvet finish
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="text-brandYellow font-bold">✓</span> Custom business logo &amp; QR on back
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="text-brandYellow font-bold">✓</span> Fast 0.5-second tap detection
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="px-6 pb-6 pt-4 mt-4 border-t border-zinc-800/80 flex items-center justify-between">
+              <span class="text-xs font-medium text-zinc-400">Premium Brand Edition</span>
+              <a
+                href="https://wa.me/918318190437?text=Hi%20OneClick%2C%20I%20want%20details%20on%20the%20VIP%20Gold-Foil%20NFC%20Card."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-whatsapp hover:underline"
+              >
+                <span>Order VIP Card</span>
+                <span>→</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Product 3: NFC Table Stand -->
+          <article class="bg-surface border border-zinc-800 rounded-2xl overflow-hidden flex flex-col justify-between card-hover group">
+            <div>
+              <!-- Product Photo + Hardware Badge Overlay -->
+              <div class="relative h-52 w-full bg-zinc-950 overflow-hidden border-b border-zinc-800/80">
+                <img
+                  src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=900&q=85"
+                  alt="OneClick NFC Table Stand placed on a modern cafe and restaurant counter"
+                  loading="lazy"
+                  onerror="this.onerror=null;this.src='https://placehold.co/800x500/111111/ffd21f?text=NFC+Table+Stand';"
+                  class="w-full h-full object-cover object-center opacity-80 group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-surface via-obsidian/40 to-transparent"></div>
+                <span class="absolute top-3.5 left-3.5 text-xs font-semibold px-3 py-1 rounded-full bg-obsidian/90 border border-zinc-700 text-zinc-200">
+                  Countertop Favorite
+                </span>
+                <!-- Mini Product Plaque Mockup Tag -->
+                <div class="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between bg-obsidian/90 backdrop-blur-md border border-brandYellow/40 rounded-xl px-3 py-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-brandYellow/20 text-brandYellow flex items-center justify-center text-xs font-black">NFC</span>
+                    <span class="text-xs font-semibold text-white">Acrylic &amp; Metal Stand</span>
+                  </div>
+                  <span class="text-xs font-bold text-brandYellow">★★★★★</span>
+                </div>
+              </div>
+
+              <div class="p-6 pb-2">
+                <h3 class="text-xl font-bold text-white">NFC Table Stand</h3>
+                <p class="mt-2 text-sm text-zinc-400 leading-relaxed">
+                  Sleek matte black &amp; gold tabletop stand with embedded NFC chip and Google 5-star badge—built for cafe tables, restaurant billing counters, and reception desks.
+                </p>
+                <ul class="mt-4 space-y-2 text-xs sm:text-sm text-zinc-300">
+                  <li class="flex items-center gap-2">
+                    <span class="text-brandYellow font-bold">✓</span> Weighted anti-slip counter base
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="text-brandYellow font-bold">✓</span> Instant tap + backup QR code
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="text-brandYellow font-bold">✓</span> Custom brand logo &amp; finish
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="px-6 pb-6 pt-4 mt-4 border-t border-zinc-800/80 flex items-center justify-between">
+              <span class="text-xs font-medium text-zinc-400">Cafe &amp; Counter Ready</span>
+              <a
+                href="https://wa.me/918318190437?text=Hi%20OneClick%2C%20I%20want%20details%20on%20the%20NFC%20Table%20Stand."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-whatsapp hover:underline"
+              >
+                <span>Order Stand</span>
+                <span>→</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Product 4: Premium NFC Desk Display -->
+          <article class="bg-surface border border-zinc-800 rounded-2xl overflow-hidden flex flex-col justify-between card-hover group">
+            <div>
+              <!-- Product Photo + Hardware Badge Overlay -->
+              <div class="relative h-52 w-full bg-zinc-950 overflow-hidden border-b border-zinc-800/80">
+                <img
+                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=85"
+                  alt="Premium NFC Desk Display plaque on a luxury reception counter"
+                  loading="lazy"
+                  onerror="this.onerror=null;this.src='https://placehold.co/800x500/111111/ffd21f?text=Premium+NFC+Desk+Display';"
+                  class="w-full h-full object-cover object-center opacity-80 group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-surface via-obsidian/40 to-transparent"></div>
+                <span class="absolute top-3.5 left-3.5 text-xs font-semibold px-3 py-1 rounded-full bg-obsidian/90 border border-zinc-700 text-zinc-200">
+                  Reception Edition
+                </span>
+                <!-- Mini Plaque Mockup Tag -->
+                <div class="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between bg-obsidian/90 backdrop-blur-md border border-brandYellow/40 rounded-xl px-3 py-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-brandYellow/20 text-brandYellow flex items-center justify-center text-xs font-black">QR+</span>
+                    <span class="text-xs font-semibold text-white">Dual NFC + QR Plaque</span>
+                  </div>
+                  <span class="text-[11px] font-bold text-brandYellow">Luxury Finish</span>
+                </div>
+              </div>
+
+              <div class="p-6 pb-2">
+                <h3 class="text-xl font-bold text-white">Premium NFC Desk Display</h3>
+                <p class="mt-2 text-sm text-zinc-400 leading-relaxed">
+                  Luxury reception counter display plaque combining a dedicated NFC tap zone with a high-contrast QR code—crafted for clinics, salons, hotels, and showrooms.
+                </p>
+                <ul class="mt-4 space-y-2 text-xs sm:text-sm text-zinc-300">
+                  <li class="flex items-center gap-2">
+                    <span class="text-brandYellow font-bold">✓</span> Dual NFC tap + camera QR scan
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="text-brandYellow font-bold">✓</span> Scratch-resistant executive plaque
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="text-brandYellow font-bold">✓</span> Custom brand header &amp; colors
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="px-6 pb-6 pt-4 mt-4 border-t border-zinc-800/80 flex items-center justify-between">
+              <span class="text-xs font-medium text-zinc-400">Clinics, Salons &amp; Desks</span>
+              <a
+                href="https://wa.me/918318190437?text=Hi%20OneClick%2C%20I%20want%20details%20on%20the%20Premium%20NFC%20Desk%20Display."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-whatsapp hover:underline"
+              >
+                <span>Order Display</span>
+                <span>→</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Product 5: NFC Window/Counter Sticker -->
+          <article class="bg-surface border border-zinc-800 rounded-2xl overflow-hidden flex flex-col justify-between card-hover group">
+            <div>
+              <!-- Product Photo + Hardware Badge Overlay -->
+              <div class="relative h-52 w-full bg-zinc-950 overflow-hidden border-b border-zinc-800/80">
+                <img
+                  src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=900&q=85"
+                  alt="NFC Window and Counter Sticker placed on a glass storefront and POS desk"
+                  loading="lazy"
+                  onerror="this.onerror=null;this.src='https://placehold.co/800x500/111111/ffd21f?text=NFC+Window+%26+Counter+Sticker';"
+                  class="w-full h-full object-cover object-center opacity-80 group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-surface via-obsidian/40 to-transparent"></div>
+                <span class="absolute top-3.5 left-3.5 text-xs font-semibold px-3 py-1 rounded-full bg-obsidian/90 border border-zinc-700 text-zinc-200">
+                  Peel &amp; Stick
+                </span>
+                <!-- Mini Sticker Mockup Tag -->
+                <div class="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between bg-obsidian/90 backdrop-blur-md border border-brandYellow/40 rounded-xl px-3 py-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-brandYellow/20 text-brandYellow flex items-center justify-center text-xs font-black">●</span>
+                    <span class="text-xs font-semibold text-white">Waterproof NFC Decal</span>
+                  </div>
+                  <span class="text-[11px] font-bold text-brandYellow">3M Adhesive</span>
+                </div>
+              </div>
+
+              <div class="p-6 pb-2">
+                <h3 class="text-xl font-bold text-white">NFC Window / Counter Sticker</h3>
+                <p class="mt-2 text-sm text-zinc-400 leading-relaxed">
+                  Minimalist waterproof contactless tap sticker engineered for glass entrance doors, salon mirrors, POS billing counters, and takeaway packaging.
+                </p>
+                <ul class="mt-4 space-y-2 text-xs sm:text-sm text-zinc-300">
+                  <li class="flex items-center gap-2">
+                    <span class="text-brandYellow font-bold">✓</span> Weatherproof &amp; smudge-resistant
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="text-brandYellow font-bold">✓</span> Anti-metal shielding option for POS
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="text-brandYellow font-bold">✓</span> Multi-pack sheets for every zone
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="px-6 pb-6 pt-4 mt-4 border-t border-zinc-800/80 flex items-center justify-between">
+              <span class="text-xs font-medium text-zinc-400">Glass &amp; POS Decals</span>
+              <a
+                href="https://wa.me/918318190437?text=Hi%20OneClick%2C%20I%20want%20details%20on%20NFC%20Window%2FCounter%20Stickers."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-whatsapp hover:underline"
+              >
+                <span>Order Stickers</span>
+                <span>→</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Product 6: Custom Bundles -->
+          <article class="bg-surface border border-brandYellow/40 rounded-2xl p-6 flex flex-col justify-between card-hover">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="w-11 h-11 rounded-xl bg-brandYellow text-obsidian flex items-center justify-center font-extrabold">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                  </svg>
+                </span>
+                <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-brandYellow/15 text-brandYellow">
+                  Best Value Kit
+                </span>
+              </div>
+              <h3 class="text-xl font-bold text-white">Custom Business Bundles</h3>
+              <p class="mt-2 text-sm text-zinc-300 leading-relaxed">
+                Combine Smart NFC Review Cards, VIP Gold Cards, NFC Table Stands, and Window Stickers in one tailored kit for clinics, cafes, salons, and multi-branch franchises.
+              </p>
+              <ul class="mt-4 space-y-2 text-xs sm:text-sm text-zinc-300">
+                <li class="flex items-center gap-2">
+                  <span class="text-brandYellow font-bold">✓</span> Custom Logo &amp; Brand Colors
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-brandYellow font-bold">✓</span> Pre-Programmed Google Links
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-brandYellow font-bold">✓</span> Bulk &amp; Franchise Discounts
+                </li>
+              </ul>
+            </div>
+            <div class="pt-4 mt-4 border-t border-zinc-800/80">
+              <a
+                href="https://wa.me/918318190437?text=Hi%20OneClick%2C%20I%20need%20a%20Custom%20Bundle%20quote%20for%20my%20business."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full inline-flex items-center justify-center gap-2 bg-whatsapp hover:bg-whatsappDark text-white font-semibold text-xs sm:text-sm px-4 py-3 rounded-xl transition-colors"
+              >
+                <span>Get Custom Bundle Quote</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Real-World Use Case Gallery / 'NFC Cards in Action' Strip -->
+    <section id="in-action" class="py-16 sm:py-20 bg-surfaceElev/50 border-t border-zinc-800/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+          <div>
+            <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-brandYellow">
+              NFC Cards &amp; Stands In Action
+            </span>
+            <h2 class="mt-1.5 text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+              Real-World Taps Across Every Industry
+            </h2>
+          </div>
+          <p class="text-xs sm:text-sm text-zinc-400 max-w-md">
+            See how staff tap cards, counter plaques, and tabletop stands help businesses collect 5-star Google reviews effortlessly.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Use Case 1: Staff Tap Cards & Retail Checkout -->
+          <div class="group relative rounded-2xl overflow-hidden border border-zinc-800 bg-obsidian card-hover">
+            <div class="relative h-60 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=85"
+                alt="Customer tapping phone on OneClick Smart NFC Review Card at checkout"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://placehold.co/800x550/111111/ffd21f?text=Smart+NFC+Card+Tap';"
+                class="w-full h-full object-cover object-center opacity-80 group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/45 to-transparent"></div>
+              <span class="absolute top-3.5 left-3.5 text-[11px] font-bold uppercase tracking-wider bg-obsidian/90 text-brandYellow border border-brandYellow/40 px-3 py-1 rounded-full">
+                NFC Tap Cards
+              </span>
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-bold text-white">Staff &amp; Delivery Tap Cards</h3>
+              <p class="mt-1.5 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                Team members carry a pocket NFC card and present it right after a positive service—capturing verified reviews on the spot.
+              </p>
+            </div>
+          </div>
+
+          <!-- Use Case 2: Salon & Spa Reception -->
+          <div class="group relative rounded-2xl overflow-hidden border border-zinc-800 bg-obsidian card-hover">
+            <div class="relative h-60 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=85"
+                alt="OneClick NFC Desk Display at a modern salon and studio reception"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://placehold.co/800x550/111111/ffd21f?text=Salon+%26+Studio+Reception';"
+                class="w-full h-full object-cover object-center opacity-80 group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/45 to-transparent"></div>
+              <span class="absolute top-3.5 left-3.5 text-[11px] font-bold uppercase tracking-wider bg-obsidian/90 text-brandYellow border border-brandYellow/40 px-3 py-1 rounded-full">
+                Salon &amp; Studio
+              </span>
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-bold text-white">Salon &amp; Beauty Reception</h3>
+              <p class="mt-1.5 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                Clients tap the VIP NFC Card or Desk Display right after a fresh makeover when excitement is at its highest.
+              </p>
+            </div>
+          </div>
+
+          <!-- Use Case 3: Clinic & Healthcare Desk -->
+          <div class="group relative rounded-2xl overflow-hidden border border-zinc-800 bg-obsidian card-hover">
+            <div class="relative h-60 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=900&q=85"
+                alt="OneClick NFC Review Stand on a clinic and dental reception desk"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://placehold.co/800x550/111111/ffd21f?text=Clinic+%26+Healthcare+Desk';"
+                class="w-full h-full object-cover object-center opacity-80 group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/45 to-transparent"></div>
+              <span class="absolute top-3.5 left-3.5 text-[11px] font-bold uppercase tracking-wider bg-obsidian/90 text-brandYellow border border-brandYellow/40 px-3 py-1 rounded-full">
+                Clinic &amp; Dental
+              </span>
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-bold text-white">Clinic &amp; Healthcare Desks</h3>
+              <p class="mt-1.5 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                Patients tap their phone at checkout in seconds—building verified Google trust for families searching nearby care.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3-Step How It Works Band -->
+    <section id="how-it-works" class="py-20 sm:py-24 bg-surface border-y border-zinc-800/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-14">
+          <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-brandYellow">
+            Simple 3-Step Flow
+          </span>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+            How OneClick Works in Seconds
+          </h2>
+          <p class="mt-3 text-sm sm:text-base text-zinc-400">
+            Designed so busy customers can share feedback effortlessly right after a great experience.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          <!-- Step 1 -->
+          <div class="bg-obsidian border border-zinc-800 rounded-2xl p-6 sm:p-7 relative">
+            <div class="flex items-center justify-between mb-5">
+              <span class="text-3xl font-black text-brandYellow">01</span>
+              <span class="text-xs font-semibold uppercase tracking-wider text-zinc-400 bg-surface px-3 py-1 rounded-full border border-zinc-800">
+                Share Your Link
+              </span>
+            </div>
+            <h3 class="text-xl font-bold text-white">Send Your Google Review Link</h3>
+            <p class="mt-2.5 text-sm text-zinc-400 leading-relaxed">
+              Share your Google Business Profile review link and brand logo with us on WhatsApp. We program and test your OneClick cards, stands, and stickers before dispatch.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="bg-obsidian border border-zinc-800 rounded-2xl p-6 sm:p-7 relative">
+            <div class="flex items-center justify-between mb-5">
+              <span class="text-3xl font-black text-brandYellow">02</span>
+              <span class="text-xs font-semibold uppercase tracking-wider text-zinc-400 bg-surface px-3 py-1 rounded-full border border-zinc-800">
+                Customer Action
+              </span>
+            </div>
+            <h3 class="text-xl font-bold text-white">Customer Taps or Scans</h3>
+            <p class="mt-2.5 text-sm text-zinc-400 leading-relaxed">
+              At checkout, reception, or table service, your customer taps their smartphone on the NFC card/stand or scans the QR code—no app required.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="bg-obsidian border border-zinc-800 rounded-2xl p-6 sm:p-7 relative">
+            <div class="flex items-center justify-between mb-5">
+              <span class="text-3xl font-black text-brandYellow">03</span>
+              <span class="text-xs font-semibold uppercase tracking-wider text-zinc-400 bg-surface px-3 py-1 rounded-full border border-zinc-800">
+                Local Growth
+              </span>
+            </div>
+            <h3 class="text-xl font-bold text-white">Publish &amp; Climb Local Search</h3>
+            <p class="mt-2.5 text-sm text-zinc-400 leading-relaxed">
+              Your Google review page opens immediately so customers can rate and post in under a minute, boosting local trust and Google Maps visibility.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6-Card Benefits Grid -->
+    <section id="benefits" class="py-20 sm:py-24 bg-obsidian">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-14">
+          <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-brandYellow">
+            Why Businesses Choose OneClick
+          </span>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+            Built to Multiply Authentic Google Reviews
+          </h2>
+          <p class="mt-3 text-sm sm:text-base text-zinc-400">
+            Remove every friction point between a happy customer and a published Google review.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Benefit 1 -->
+          <div class="bg-surface border border-zinc-800 rounded-2xl p-6 card-hover">
+            <div class="w-10 h-10 rounded-xl bg-brandYellow/15 text-brandYellow flex items-center justify-center font-bold mb-4">
+              ⚡
+            </div>
+            <h3 class="text-lg font-bold text-white">Instant Frictionless Experience</h3>
+            <p class="mt-2 text-sm text-zinc-400 leading-relaxed">
+              Customers skip searching for your business name or typing long links—one tap takes them straight to your review prompt.
+            </p>
+          </div>
+
+          <!-- Benefit 2 -->
+          <div class="bg-surface border border-zinc-800 rounded-2xl p-6 card-hover">
+            <div class="w-10 h-10 rounded-xl bg-brandYellow/15 text-brandYellow flex items-center justify-center font-bold mb-4">
+              📍
+            </div>
+            <h3 class="text-lg font-bold text-white">Stronger Local SEO &amp; Maps Rank</h3>
+            <p class="mt-2 text-sm text-zinc-400 leading-relaxed">
+              Consistent, fresh customer reviews help your business stand out in local search results and Google Maps packs.
+            </p>
+          </div>
+
+          <!-- Benefit 3 -->
+          <div class="bg-surface border border-zinc-800 rounded-2xl p-6 card-hover">
+            <div class="w-10 h-10 rounded-xl bg-brandYellow/15 text-brandYellow flex items-center justify-center font-bold mb-4">
+              🛡️
+            </div>
+            <h3 class="text-lg font-bold text-white">Higher First-Impression Trust</h3>
+            <p class="mt-2 text-sm text-zinc-400 leading-relaxed">
+              New prospects compare ratings before booking or buying. A steady stream of recent reviews builds immediate confidence.
+            </p>
+          </div>
+
+          <!-- Benefit 4 -->
+          <div class="bg-surface border border-zinc-800 rounded-2xl p-6 card-hover">
+            <div class="w-10 h-10 rounded-xl bg-brandYellow/15 text-brandYellow flex items-center justify-center font-bold mb-4">
+              🎨
+            </div>
+            <h3 class="text-lg font-bold text-white">Custom Branded Finish</h3>
+            <p class="mt-2 text-sm text-zinc-400 leading-relaxed">
+              Every card, stand, and sticker reflects your brand identity cleanly at counters, desks, and service touchpoints.
+            </p>
+          </div>
+
+          <!-- Benefit 5 -->
+          <div class="bg-surface border border-zinc-800 rounded-2xl p-6 card-hover">
+            <div class="w-10 h-10 rounded-xl bg-brandYellow/15 text-brandYellow flex items-center justify-center font-bold mb-4">
+              📱
+            </div>
+            <h3 class="text-lg font-bold text-white">No App or Subscription Needed</h3>
+            <p class="mt-2 text-sm text-zinc-400 leading-relaxed">
+              Buy once and use continuously with zero mandatory monthly software fees or customer app downloads.
+            </p>
+          </div>
+
+          <!-- Benefit 6 -->
+          <div class="bg-surface border border-zinc-800 rounded-2xl p-6 card-hover">
+            <div class="w-10 h-10 rounded-xl bg-brandYellow/15 text-brandYellow flex items-center justify-center font-bold mb-4">
+              💬
+            </div>
+            <h3 class="text-lg font-bold text-white">Direct WhatsApp Onboarding</h3>
+            <p class="mt-2 text-sm text-zinc-400 leading-relaxed">
+              Need custom quantities, artwork help, or multi-branch setup? Message our team directly on WhatsApp for fast support.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call-to-Action Banner -->
+    <section class="py-16 sm:py-20 bg-obsidian">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="rounded-3xl bg-gradient-to-r from-surface via-surfaceElev to-surface border border-brandYellow/35 px-6 py-10 sm:px-12 sm:py-14 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-2xl">
+          <div class="text-center lg:text-left max-w-2xl">
+            <span class="inline-block text-xs font-bold uppercase tracking-wider text-brandYellow mb-2">
+              Ready to Grow Your Google Rating?
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
+              Start Collecting 5-Star Reviews at Every Counter Today
+            </h2>
+            <p class="mt-3 text-sm sm:text-base text-zinc-300">
+              Chat with OneClick on WhatsApp to pick the right NFC cards, stands, QR displays, stickers, or custom bundle for your business.
+            </p>
+          </div>
+          <div class="flex flex-col sm:flex-row items-center gap-3.5 shrink-0 w-full sm:w-auto">
+            <a
+              href="https://wa.me/918318190437?text=Hi%20OneClick%2C%20I%20want%20to%20get%20started%20with%20OneClick%20Google%20Review%20products."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-whatsapp hover:bg-whatsappDark text-white font-bold text-sm sm:text-base px-6 py-3.5 rounded-xl shadow-lg shadow-whatsapp/25 transition-all"
+            >
+              <span>Chat on WhatsApp Now</span>
+            </a>
+            <a
+              href="#contact"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brandYellow hover:bg-brandYellowDark text-obsidian font-bold text-sm sm:text-base px-6 py-3.5 rounded-xl transition-all"
+            >
+              <span>Send Inquiry</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Two-Column Contact Section -->
+    <section id="contact" class="py-20 sm:py-24 bg-surface border-t border-zinc-800/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-14">
+          <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-brandYellow">
+            Get in Touch
+          </span>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+            Contact OneClick
+          </h2>
+          <p class="mt-3 text-sm sm:text-base text-zinc-400">
+            Have questions about bulk pricing, custom branding, or setting up your Google review link? Reach out directly.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Left Column: Direct Contact Info, Address & Email Card -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="bg-obsidian border border-zinc-800 rounded-2xl p-6 sm:p-7">
+              <div class="flex items-center justify-between gap-2">
+                <h3 class="text-xl font-bold text-white">Direct Support &amp; Office</h3>
+                <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-brandYellow/15 text-brandYellow">
+                  Amethi, UP
+                </span>
+              </div>
+              <p class="mt-2 text-sm text-zinc-400 leading-relaxed">
+                Fastest response via WhatsApp or Email for custom NFC card orders, bulk quotes, and Google review setup guidance.
+              </p>
+
+              <div class="mt-6 space-y-4 text-sm">
+                <!-- WhatsApp & Phone -->
+                <div class="flex items-start gap-3.5">
+                  <span class="w-9 h-9 rounded-lg bg-whatsapp/15 text-whatsapp flex items-center justify-center font-bold shrink-0">
+                    WA
+                  </span>
+                  <div>
+                    <p class="font-semibold text-white">WhatsApp &amp; Phone</p>
+                    <a href="https://wa.me/918318190437" target="_blank" rel="noopener noreferrer" class="text-zinc-300 hover:text-brandYellow transition-colors">
+                      +91 83181 90437
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Email ID -->
+                <div class="flex items-start gap-3.5">
+                  <span class="w-9 h-9 rounded-lg bg-brandYellow/15 text-brandYellow flex items-center justify-center font-bold shrink-0">
+                    @
+                  </span>
+                  <div class="min-w-0 flex-1">
+                    <p class="font-semibold text-white">Email Support</p>
+                    <div class="flex flex-wrap items-center gap-2 mt-0.5">
+                      <a href="mailto:hello.nfc@gmail.com" class="text-zinc-300 hover:text-brandYellow transition-colors break-all">
+                        hello.nfc@gmail.com
+                      </a>
+                      <button
+                        type="button"
+                        id="copy-email-btn"
+                        class="text-[11px] font-semibold px-2 py-0.5 rounded bg-surfaceElev border border-zinc-700 text-zinc-300 hover:text-brandYellow hover:border-brandYellow/50 transition-colors cursor-pointer"
+                      >
+                        Copy
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Business Address -->
+                <div class="flex items-start gap-3.5">
+                  <span class="w-9 h-9 rounded-lg bg-brandYellow/15 text-brandYellow flex items-center justify-center font-bold shrink-0">
+                    📍
+                  </span>
+                  <div>
+                    <p class="font-semibold text-white">Business Address</p>
+                    <p class="text-zinc-300 leading-relaxed mt-0.5">
+                      Vijay Cyber City, Raipur Fulwari, Amethi, Uttar Pradesh, 227405
+                    </p>
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Vijay+Cyber+City+Raipur+Fulwari+Amethi+Uttar+Pradesh+227405"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1 text-xs font-semibold text-brandYellow hover:underline mt-1.5"
+                    >
+                      <span>View on Google Maps</span>
+                      <span>↗</span>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Ideal For -->
+                <div class="flex items-start gap-3.5">
+                  <span class="w-9 h-9 rounded-lg bg-brandYellow/15 text-brandYellow flex items-center justify-center font-bold shrink-0">
+                    ★
+                  </span>
+                  <div>
+                    <p class="font-semibold text-white">Ideal For</p>
+                    <p class="text-zinc-300">Clinics, Restaurants, Cafes, Salons, Retail, Showrooms &amp; Agencies</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-7 pt-6 border-t border-zinc-800 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <a
+                  href="https://wa.me/918318190437?text=Hi%20OneClick%2C%20I%20would%20like%20to%20connect%20regarding%20NFC%20Google%20Review%20solutions."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center gap-2 bg-whatsapp hover:bg-whatsappDark text-white font-semibold text-sm px-4 py-3 rounded-xl transition-colors"
+                >
+                  <span>WhatsApp Chat</span>
+                </a>
+                <a
+                  href="mailto:hello.nfc@gmail.com?subject=OneClick%20NFC%20Review%20Inquiry"
+                  class="inline-flex items-center justify-center gap-2 bg-surfaceElev hover:bg-zinc-800 border border-zinc-700 text-white font-semibold text-sm px-4 py-3 rounded-xl transition-colors"
+                >
+                  <span>Email Us</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Inquiry Form -->
+          <div class="lg:col-span-7">
+            <form id="contact-form" class="bg-obsidian border border-zinc-800 rounded-2xl p-6 sm:p-8 space-y-5" novalidate>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="full-name" class="block text-xs sm:text-sm font-semibold text-zinc-200 mb-2">
+                    Your Name *
+                  </label>
+                  <input
+                    id="full-name"
+                    name="name"
+                    type="text"
+                    required
+                    placeholder="e.g., Aarav Sharma"
+                    class="w-full rounded-xl bg-surface border border-zinc-700 focus:border-brandYellow focus:outline-none px-4 py-3 text-sm text-white placeholder-zinc-500 transition-colors"
+                  />
+                </div>
+                <div>
+                  <label for="business-name" class="block text-xs sm:text-sm font-semibold text-zinc-200 mb-2">
+                    Business Name *
+                  </label>
+                  <input
+                    id="business-name"
+                    name="business"
+                    type="text"
+                    required
+                    placeholder="e.g., Sunrise Dental Studio"
+                    class="w-full rounded-xl bg-surface border border-zinc-700 focus:border-brandYellow focus:outline-none px-4 py-3 text-sm text-white placeholder-zinc-500 transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="phone-number" class="block text-xs sm:text-sm font-semibold text-zinc-200 mb-2">
+                    Phone / WhatsApp Number *
+                  </label>
+                  <input
+                    id="phone-number"
+                    name="phone"
+                    type="tel"
+                    required
+                    placeholder="+91 98XXX XXXXX"
+                    class="w-full rounded-xl bg-surface border border-zinc-700 focus:border-brandYellow focus:outline-none px-4 py-3 text-sm text-white placeholder-zinc-500 transition-colors"
+                  />
+                </div>
+                <div>
+                  <label for="product-interest" class="block text-xs sm:text-sm font-semibold text-zinc-200 mb-2">
+                    Interested Product
+                  </label>
+                  <select
+                    id="product-interest"
+                    name="product"
+                    class="w-full rounded-xl bg-surface border border-zinc-700 focus:border-brandYellow focus:outline-none px-4 py-3 text-sm text-white transition-colors"
+                  >
+                    <option value="Smart NFC Review Cards">Smart NFC Review Cards</option>
+                    <option value="VIP Gold-Foil NFC Cards">VIP Gold-Foil NFC Cards</option>
+                    <option value="NFC Table Stands">NFC Table Stands</option>
+                    <option value="Premium NFC Desk Displays">Premium NFC Desk Displays</option>
+                    <option value="NFC Window/Counter Stickers">NFC Window/Counter Stickers</option>
+                    <option value="Custom Business Bundles">Custom Business Bundles</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label for="message-box" class="block text-xs sm:text-sm font-semibold text-zinc-200 mb-2">
+                  Requirements / Quantity Notes
+                </label>
+                <textarea
+                  id="message-box"
+                  name="message"
+                  rows="4"
+                  placeholder="Tell us how many cards, stands, stickers, or bundle packs you need..."
+                  class="w-full rounded-xl bg-surface border border-zinc-700 focus:border-brandYellow focus:outline-none px-4 py-3 text-sm text-white placeholder-zinc-500 transition-colors"
+                ></textarea>
+              </div>
+
+              <!-- Status / Feedback Message Box (No alert() used) -->
+              <div id="form-feedback" class="hidden rounded-xl px-4 py-3 text-sm font-medium" role="status" aria-live="polite"></div>
+
+              <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-1">
+                <button
+                  type="submit"
+                  class="inline-flex items-center justify-center gap-2 bg-brandYellow hover:bg-brandYellowDark text-obsidian font-bold text-sm sm:text-base px-6 py-3.5 rounded-xl transition-colors cursor-pointer"
+                >
+                  <span>Prepare Inquiry &amp; Open WhatsApp</span>
+                </button>
+                <span class="text-xs text-zinc-400 text-center sm:text-right">
+                  Instant pre-filled WhatsApp summary
+                </span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-obsidian border-t border-zinc-800/90 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8 border-b border-zinc-800/80">
+        <div class="md:col-span-5">
+          <div class="flex items-center gap-3">
+            <span class="w-9 h-9 rounded-lg bg-brandYellow text-obsidian font-black text-base flex items-center justify-center">
+              1C
+            </span>
+            <div>
+              <p class="text-lg font-extrabold text-white leading-none">OneClick</p>
+              <p class="text-xs font-medium text-brandYellow mt-1">Tap. Review. Grow.</p>
+            </div>
+          </div>
+          <p class="mt-3 text-xs sm:text-sm text-zinc-400 max-w-md leading-relaxed">
+            Smart NFC cards, VIP gold tap cards, counter stands, QR displays, stickers, and custom bundles built to help local businesses earn more Google reviews.
+          </p>
+        </div>
+
+        <!-- Office & Contact Details -->
+        <div class="md:col-span-4 space-y-2 text-xs sm:text-sm text-zinc-400">
+          <p class="font-bold text-white uppercase tracking-wider text-xs">Office &amp; Contact</p>
+          <p class="leading-relaxed">
+            Vijay Cyber City, Raipur Fulwari, Amethi, Uttar Pradesh, 227405
+          </p>
+          <p>
+            Email:
+            <a href="mailto:hello.nfc@gmail.com" class="text-zinc-200 hover:text-brandYellow transition-colors">
+              hello.nfc@gmail.com
+            </a>
+          </p>
+          <p>
+            WhatsApp:
+            <a href="https://wa.me/918318190437" target="_blank" rel="noopener noreferrer" class="text-zinc-200 hover:text-brandYellow transition-colors">
+              +91 83181 90437
+            </a>
+          </p>
+        </div>
+
+        <!-- Footer Navigation -->
+        <div class="md:col-span-3 flex flex-col space-y-2 text-xs sm:text-sm font-medium text-zinc-400">
+          <p class="font-bold text-white uppercase tracking-wider text-xs">Quick Links</p>
+          <a href="#home" class="hover:text-brandYellow transition-colors">Home</a>
+          <a href="#products" class="hover:text-brandYellow transition-colors">Products</a>
+          <a href="#how-it-works" class="hover:text-brandYellow transition-colors">How It Works</a>
+          <a href="#benefits" class="hover:text-brandYellow transition-colors">Benefits</a>
+          <a href="#contact" class="hover:text-brandYellow transition-colors">Contact</a>
+        </div>
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+        <p>© <span id="current-year">2026</span> OneClick. All rights reserved.</p>
+        <p>Vijay Cyber City, Raipur Fulwari, Amethi, UP 227405 • hello.nfc@gmail.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      try {
+        // Set current year dynamically
+        const yearEl = document.getElementById('current-year');
+        if (yearEl) {
+          yearEl.textContent = String(new Date().getFullYear());
+        }
+
+        // Mobile navigation toggle logic
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconHamburger = document.getElementById('icon-hamburger');
+        const iconClose = document.getElementById('icon-close');
+        const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+        function setMenuState(isOpen) {
+          if (!mobileMenu || !menuBtn) return;
+          mobileMenu.classList.toggle('hidden', !isOpen);
+          menuBtn.setAttribute('aria-expanded', String(isOpen));
+          if (iconHamburger) iconHamburger.classList.toggle('hidden', isOpen);
+          if (iconClose) iconClose.classList.toggle('hidden', !isOpen);
+        }
+
+        if (menuBtn) {
+          menuBtn.addEventListener('click', function () {
+            const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+            setMenuState(!expanded);
+          });
+        }
+
+        // Close mobile drawer when any navigation link is tapped
+        mobileLinks.forEach(function (link) {
+          link.addEventListener('click', function () {
+            setMenuState(false);
+          });
+        });
+
+        // Reset drawer state if viewport widens to desktop
+        window.addEventListener('resize', function () {
+          if (window.innerWidth >= 768) {
+            setMenuState(false);
+          }
+        });
+
+        // Interactive Hero NFC Card Tap Simulator
+        const heroSimCard = document.getElementById('hero-nfc-simulator');
+        const heroTestBtn = document.getElementById('hero-test-tap-btn');
+        const heroSimPopup = document.getElementById('hero-sim-popup');
+        const heroSimTitle = document.getElementById('hero-sim-title');
+        const heroSimStatus = document.getElementById('hero-sim-status');
+        let simTimer = null;
+
+        function triggerNfcTapSimulation() {
+          if (!heroSimPopup || !heroSimTitle || !heroSimStatus) return;
+          if (simTimer) clearTimeout(simTimer);
+
+          heroSimPopup.classList.remove('border-zinc-700');
+          heroSimPopup.classList.add('border-whatsapp', 'ring-2', 'ring-whatsapp/40', 'scale-105');
+          heroSimTitle.textContent = 'Google Review Opened!';
+          heroSimStatus.textContent = '★★★★★ Ready to Post';
+          heroSimStatus.classList.remove('text-brandYellow');
+          heroSimStatus.classList.add('text-whatsapp');
+
+          simTimer = setTimeout(function () {
+            heroSimPopup.classList.add('border-zinc-700');
+            heroSimPopup.classList.remove('border-whatsapp', 'ring-2', 'ring-whatsapp/40', 'scale-105');
+            heroSimTitle.textContent = 'Click Card to Test Tap';
+            heroSimStatus.textContent = 'Instant 0.8s Prompt';
+            heroSimStatus.classList.add('text-brandYellow');
+            heroSimStatus.classList.remove('text-whatsapp');
+          }, 2600);
+        }
+
+        if (heroSimCard) {
+          heroSimCard.addEventListener('click', triggerNfcTapSimulation);
+          heroSimCard.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              triggerNfcTapSimulation();
+            }
+          });
+        }
+        if (heroTestBtn) {
+          heroTestBtn.addEventListener('click', triggerNfcTapSimulation);
+        }
+
+        // Copy Email Button with execCommand fallback
+        const copyEmailBtn = document.getElementById('copy-email-btn');
+        if (copyEmailBtn) {
+          copyEmailBtn.addEventListener('click', function () {
+            const tempInput = document.createElement('input');
+            tempInput.value = 'hello.nfc@gmail.com';
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+              document.execCommand('copy');
+              copyEmailBtn.textContent = 'Copied!';
+              copyEmailBtn.classList.add('text-whatsapp', 'border-whatsapp/50');
+              setTimeout(function () {
+                copyEmailBtn.textContent = 'Copy';
+                copyEmailBtn.classList.remove('text-whatsapp', 'border-whatsapp/50');
+              }, 2000);
+            } catch (copyErr) {
+              console.error('Copy failed:', copyErr);
+            }
+            document.body.removeChild(tempInput);
+          });
+        }
+
+        // Contact form handler: validates inputs and opens pre-filled WhatsApp chat
+        const contactForm = document.getElementById('contact-form');
+        const feedbackEl = document.getElementById('form-feedback');
+
+        function showFeedback(message, isError) {
+          if (!feedbackEl) return;
+          feedbackEl.textContent = message;
+          feedbackEl.classList.remove('hidden');
+          feedbackEl.className = isError
+            ? 'rounded-xl px-4 py-3 text-sm font-medium bg-red-950/70 border border-red-700/70 text-red-200'
+            : 'rounded-xl px-4 py-3 text-sm font-medium bg-emerald-950/70 border border-whatsapp/50 text-emerald-200';
+        }
+
+        if (contactForm) {
+          contactForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const nameInput = document.getElementById('full-name');
+            const businessInput = document.getElementById('business-name');
+            const phoneInput = document.getElementById('phone-number');
+            const productInput = document.getElementById('product-interest');
+            const messageInput = document.getElementById('message-box');
+
+            const name = nameInput ? nameInput.value.trim() : '';
+            const business = businessInput ? businessInput.value.trim() : '';
+            const phone = phoneInput ? phoneInput.value.trim() : '';
+            const product = productInput ? productInput.value : 'NFC Review Cards';
+            const notes = messageInput ? messageInput.value.trim() : '';
+
+            if (!name || !business || !phone) {
+              showFeedback('Please fill in your name, business name, and phone/WhatsApp number.', true);
+              return;
+            }
+
+            const textLines = [
+              'Hi OneClick, I have a new inquiry:',
+              '• Name: ' + name,
+              '• Business: ' + business,
+              '• Phone/WhatsApp: ' + phone,
+              '• Product: ' + product,
+            ];
+            if (notes) {
+              textLines.push('• Notes: ' + notes);
+            }
+
+            const waUrl = 'https://wa.me/918318190437?text=' + encodeURIComponent(textLines.join('\n'));
+            showFeedback('Inquiry ready! Opening WhatsApp chat with OneClick...', false);
+
+            const openedWindow = window.open(waUrl, '_blank', 'noopener,noreferrer');
+            if (!openedWindow) {
+              window.location.href = waUrl;
+            }
+          });
+        }
+      } catch (err) {
+        console.error('OneClick initialization error:', err);
+      }
+    })();
+  </script>
+</body>
+</html>
